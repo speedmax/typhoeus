@@ -88,6 +88,10 @@ module Typhoeus
     end
 
     def stub(method, url)
+      @stubs.delete_if do|stub| 
+        stub.method == method and stub.url == url
+      end
+
       @stubs << HydraMock.new(url, method)
       @stubs.last
     end
